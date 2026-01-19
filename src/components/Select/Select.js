@@ -44,6 +44,15 @@ const PresentationalBit = styled.div`
   padding: 12px 16px;
   padding-right: 52px;
   border-radius: 8px;
+
+  ${NativeSelect}:focus + & {
+    outline: 1px dotted #212121;
+    outline: 5px auto -webkit-focus-ring-color;
+  }
+
+  ${NativeSelect}:hover + & {
+    color: ${COLORS.black};
+  }
 `;
 
 const IconWrapper = styled.div`
@@ -54,6 +63,7 @@ const IconWrapper = styled.div`
   margin: auto;
   width: var(--size);
   height: var(--size);
+  pointer-events: none;
 `;
 
 export default Select;
