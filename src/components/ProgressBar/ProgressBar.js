@@ -8,13 +8,16 @@ import VisuallyHidden from "../VisuallyHidden";
 const STYLES = {
   small: {
     height: 8,
+    radius: 4,
   },
   medium: {
     height: 12,
+    radius: 4,
   },
   large: {
     height: 16,
     padding: 4,
+    radius: 8,
   },
 };
 
@@ -32,6 +35,7 @@ const ProgressBar = ({ value, size }) => {
       aria-valuemax={100}
       style={{
         "--padding": styles.padding + "px",
+        "--radius": styles.radius + "px",
       }}
     >
       <VisuallyHidden>{value}%</VisuallyHidden>
@@ -47,7 +51,7 @@ const ProgressBar = ({ value, size }) => {
 const Wrapper = styled.div`
   background-color: ${COLORS.transparentGray15};
   box-shadow: inset 0px 2px 4px ${COLORS.transparentGray35};
-  border-radius: 4px;
+  border-radius: var(--radius);
   padding: var(--padding);
 `;
 
