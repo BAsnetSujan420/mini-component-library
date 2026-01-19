@@ -13,13 +13,18 @@ const Select = ({ label, value, onChange, children }) => {
       <NativeSelect value={value} onChange={onChange}>
         {children}
       </NativeSelect>
-      <PresentationalBit>Hello World</PresentationalBit>
+      <PresentationalBit>
+        {displayedValue}
+        <IconWrapper style={{ "--size": 24 + "px" }}>
+          <Icon id="chevron-down" size={24} strokeWidth={2}></Icon>
+        </IconWrapper>
+      </PresentationalBit>
     </Wrapper>
   );
 };
 
 const Wrapper = styled.div`
-  postion: relative;
+  position: relative;
   width: max-content;
 `;
 
@@ -37,6 +42,18 @@ const PresentationalBit = styled.div`
   color: ${COLORS.gray700};
   font-size: 1rem;
   padding: 12px 16px;
+  padding-right: 52px;
+  border-radius: 8px;
+`;
+
+const IconWrapper = styled.div`
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 10px;
+  margin: auto;
+  width: var(--size);
+  height: var(--size);
 `;
 
 export default Select;
