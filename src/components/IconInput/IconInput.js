@@ -6,15 +6,44 @@ import { COLORS } from "../../constants";
 import Icon from "../Icon";
 import VisuallyHidden from "../VisuallyHidden";
 
+const STYLES = {
+  small: {
+    fontSize: 14,
+    iconSize: 16,
+    borderThickness: 1,
+    height: 24,
+  },
+
+  large: {
+    fontSize: 18,
+    iconSize: 24,
+    borderThickness: 2,
+    height: 36,
+  },
+};
+
 const IconInput = ({ label, icon, width = 250, size, ...delegated }) => {
+  const styles = STYLES[size];
+
+  if (!styles) {
+    throw new Error(`Unknown size passed to IconInput : ${size}`);
+  }
   return (
     <Wrapper>
       <VisuallyHidden>{label}</VisuallyHidden>
-      <IconWrapper style={{ "--size": 16 + "px" }}>
-        <Icon id={icon} size={16} />
+      <IconWrapper style={{ "--size": styles.iconSize + "px" }}>
+        <Icon id={icon} size={styles.iconSize} />
       </IconWrapper>
 
-      <TextInput {...delegated} style={{ "--width": width + "px" }} />
+      <TextInput
+        {...delegated}
+        style={{
+          "--width": width + "px",
+          "--height": styles.height / 16 + "rem",
+          "--borderThickness": styles.borderThickness + "px",
+          "--font-size": styles.fontSize / 16 + "rem",
+        }}
+      />
     </Wrapper>
   );
 };
@@ -38,11 +67,12 @@ const IconWrapper = styled.div`
 `;
 
 const TextInput = styled.input`
-  height: ${24 / 16}rem;
+  height:var(--height)
   width: var(--width);
+  font-size: var(--font-size);
   border: none;
-  border-bottom: 1px solid ${COLORS.black};
-  padding-left: 24px;
+  border-bottom: var(--borderThickness) solid ${COLORS.black};
+  padding-left: var(--height);
   color: inherit;
   font-weight: 700;
   outline-offset: 2px;
