@@ -14,7 +14,7 @@ const IconInput = ({ label, icon, width = 250, size, ...delegated }) => {
         <Icon id={icon} size={16} />
       </IconWrapper>
 
-      <TextInput {...delegated} />
+      <TextInput {...delegated} style={{ "--width": width + "px" }} />
     </Wrapper>
   );
 };
@@ -22,6 +22,11 @@ const IconInput = ({ label, icon, width = 250, size, ...delegated }) => {
 const Wrapper = styled.label`
   display: block;
   position: relative;
+  color: ${COLORS.gray700};
+
+  &:hover {
+    color: ${COLORS.black};
+  }
 `;
 
 const IconWrapper = styled.div`
@@ -34,9 +39,18 @@ const IconWrapper = styled.div`
 
 const TextInput = styled.input`
   height: ${24 / 16}rem;
+  width: var(--width);
   border: none;
   border-bottom: 1px solid ${COLORS.black};
   padding-left: 24px;
+  color: inherit;
+  font-weight: 700;
+  outline-offset: 2px;
+
+  &::placeholder {
+    font-weight: 400;
+    color: ${COLORS.gray500};
+  }
 `;
 
 export default IconInput;
